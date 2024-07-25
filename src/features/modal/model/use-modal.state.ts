@@ -9,7 +9,7 @@ export const useModalState = () => {
 
   const closeAll = () => {
     setCurrentModal(null);
-  }
+  };
 
   const memoizedState = useMemo(() => {
     return currentModal;
@@ -19,5 +19,5 @@ export const useModalState = () => {
     state: memoizedState,
     open: open,
     closeAll,
-  }
+  };
 };

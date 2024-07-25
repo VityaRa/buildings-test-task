@@ -12,7 +12,7 @@ const Modal: React.FC<IProps> = ({ header, onCrossClick, ...rest }) => {
     <dialog {...rest} className={`${styles.dialog} ${rest.className ?? ""}`} >
       <div className={styles.dialog__header}>
         <span className={styles.dialog__header__text}>{header}</span>
-        <Button onClick={onCrossClick}>
+        <Button className={styles.dialog__header__btn} variant='nofill' onClick={onCrossClick}>
           <CrossIcon />
         </Button>
       </div>

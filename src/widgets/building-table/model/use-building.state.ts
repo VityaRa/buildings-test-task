@@ -1,8 +1,14 @@
+import { enrtiesList } from "@/entities/entry/entry.data";
 import { IBuildingTableRow } from "@/features/building-table-items";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 
 type BuildingsState = { [key: number]: IBuildingTableRow[] };
-const DEFAULT_STATE: BuildingsState = {};
+const DEFAULT_STATE: BuildingsState = {
+  1: [],
+  2: [],
+  3: [],
+  4: [],
+};
 
 export const useBuildingState = () => {
   const [entries, setEntries] = useState<BuildingsState>(DEFAULT_STATE);

@@ -7,15 +7,17 @@ interface IProps {
   label: string;
   onSelect: (val: unknown) => void;
   value: unknown;
+  keyActive?: boolean;
 }
 
-const Option: React.FC<IProps> = ({ active, label, onSelect, value }) => {
+const Option: React.FC<IProps> = ({ active, label, onSelect, value, keyActive }) => {
   return (
     <Button
-      className={`${styles.btn} ${active ? styles.btn_active : ""}`}
+      className={`${styles.btn} ${active ? styles.btn_active : ""} ${keyActive ? styles.btn_active_key : ''}`}
       onClick={() => onSelect(value)}
+      variant="nofill"
     >
-      <span className={styles.text}>{label}</span>
+      {label}
     </Button>
   );
 };

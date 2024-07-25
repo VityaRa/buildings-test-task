@@ -32,4 +32,4 @@ const BuildingTable: React.FC<IProps> = ({
   );
 };
 
-export default BuildingTable;
+export default React.memo(BuildingTable);

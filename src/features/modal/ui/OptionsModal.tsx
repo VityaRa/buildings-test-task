@@ -1,6 +1,6 @@
-import { getApartmentLabel } from "@/entities/apartment";
 import { Modal, Option } from "@/shared/ui";
 import { ReactNode } from "react";
+import styles from "./OptionsModal.module.scss";
 
 interface IProps {
   label: string;
@@ -13,6 +13,8 @@ interface IProps {
   onSelect: (val: number) => void;
   opened: boolean;
   children?: ReactNode;
+
+  tempSelectedOption?: number;
 }
 
 const OptionsModal: React.FC<IProps> = ({
@@ -24,9 +26,16 @@ const OptionsModal: React.FC<IProps> = ({
   onSelect,
   selectedOptions,
   children,
+  tempSelectedOption,
 }) => {
   return (
-    <Modal open={opened} onClose={onClose} header={label} onCrossClick={onClose}>
+    <Modal
+      open={opened}
+      onClose={onClose}
+      header={label}
+      onCrossClick={onClose}
+      className={styles.modal}
+    >
       {options.map((val, idx) => (
         <Option
           key={idx}
@@ -34,6 +43,7 @@ const OptionsModal: React.FC<IProps> = ({
           label={getOptionLabel(val)}
           onSelect={(val) => onSelect(val as number)}
           active={selectedOptions.includes(val)}
+          keyActive={idx === tempSelectedOption}
         />
       ))}
       {children}

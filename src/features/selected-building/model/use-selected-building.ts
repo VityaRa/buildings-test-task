@@ -25,26 +25,30 @@ export const useSelectedBuilding = (
     if (!currentBuilding) {
       return;
     }
-
     setCurrentEntry(val);
   };
 
   const onApartmentSelect = (val: number) => {
     setCurrentBuilding((prev) => {
-      return (prev ?? []).map((building) => {
-        if (building.entry !== currentEntry) {
-          return building;
-        }
+      const prevArray = prev ?? [];
+      if (!currentEntry) {
+        return prevArray;
+      }
+      const currentEntryIndex = prevArray.findIndex((b) => b.entry === currentEntry);
+      if (currentEntryIndex === -1) {
+        return [...prevArray, {entry: currentEntry, apartments: [val]}]
+      };
 
-        if (building.apartments.includes(val)) {
-          return {
-            ...building,
-            apartments: building.apartments.filter((apart) => apart !== val),
-          };
-        } else {
-          return { ...building, apartments: [...building.apartments, val] };
-        }
-      });
+      const tempCurrentEntry = prevArray[currentEntryIndex];
+
+      const newApartmentsForEntry = tempCurrentEntry.apartments.includes(val) ? tempCurrentEntry.apartments.filter((aId) => aId !== val) : [...tempCurrentEntry.apartments, val];
+      if (newApartmentsForEntry.length === 0) {
+        return prevArray.filter((_, idx) => idx !== currentEntryIndex);
+      };
+
+      let copy = [...prevArray];
+      copy[currentEntryIndex] = {...tempCurrentEntry, apartments: newApartmentsForEntry};
+      return copy;
     });
   };
 
@@ -57,12 +61,13 @@ export const useSelectedBuilding = (
       ?.apartments ?? [];
 
   const onSubmit = () => {
-    if (!currentBuildingId || !currentBuilding) {
-      return;
+    if (!currentBuildingId || !currentBuilding || selectedApartments.length === 0) {
+      return false;
     };
 
-    onUpdate(currentBuildingId, currentBuilding)
-  }
+    onUpdate(currentBuildingId, currentBuilding);
+    return true;
+  };
 
   return {
     onEntrySelect,

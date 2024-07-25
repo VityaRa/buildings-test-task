@@ -1,12 +1,7 @@
-import {
-  APARTMENT_NUMBER_LABEL,
-  getApartmentLabel,
-} from "@/entities/apartment";
-import { apartmentsList } from "@/entities/apartment/apartment.data";
-import { ENTRY_NUMBER_LABEL, getEntryLabel } from "@/entities/entry";
-import { enrtiesList } from "@/entities/entry/entry.data";
-import { ModalType, OptionsModal, useModalState } from "@/features/modal";
-import { Button } from "@/shared/ui";
+import { ModalType, useModalState } from "@/features/modal";
+import { useCallback } from "react";
+import { EntranceModal } from "../ui";
+import ApartmentModal from "../ui/ApartmentModal.ui";
 
 interface IProps {
   selectedEntries: number[];
@@ -15,7 +10,7 @@ interface IProps {
   onApartmentSelect: (id: number) => void;
   onEntrySelect: (id: number) => void;
 
-  onFinish: () => void;
+  onFinish: () => boolean;
 }
 
 export const useSelectionModals = ({
@@ -30,34 +25,41 @@ export const useSelectionModals = ({
     open(ModalType.Entry);
   };
 
+  const handleOnEntrySelect = useCallback(
+    (id: number) => {
+      open(ModalType.Apartment);
+      onEntrySelect(id);
+    },
+    [state, onEntrySelect]
+  );
+
+  const handleOnFinish = useCallback(() => {
+    const success = onFinish();
+    if (!success) {
+      return;
+    }
+    closeAll();
+  }, [onFinish, closeAll]);
+
   const render = () => {
     if (state === ModalType.Entry) {
       return (
-        <OptionsModal
-          options={enrtiesList}
-          opened
-          onClose={() => closeAll()}
-          label={ENTRY_NUMBER_LABEL}
-          getOptionLabel={getEntryLabel}
-          selectedOptions={selectedEntries}
-          onSelect={onEntrySelect}
+        <EntranceModal
+          onClose={closeAll}
+          selected={selectedEntries}
+          onSelect={handleOnEntrySelect}
         />
       );
     }
 
     if (state === ModalType.Apartment) {
       return (
-        <OptionsModal
-          options={apartmentsList}
-          opened
-          onClose={() => closeAll()}
-          label={APARTMENT_NUMBER_LABEL}
-          getOptionLabel={getApartmentLabel}
-          selectedOptions={selectedApartments}
+        <ApartmentModal
+          onClose={() => open(ModalType.Entry)}
+          selected={selectedApartments}
           onSelect={onApartmentSelect}
-        >
-          <Button onClick={onFinish}>Добавить</Button>
-        </OptionsModal>
+          onFinish={handleOnFinish}
+        />
       );
     }
   };
@@ -65,5 +67,6 @@ export const useSelectionModals = ({
   return {
     onHeaderAddClick,
     render,
+    canEdit: state === null,
   };
 };

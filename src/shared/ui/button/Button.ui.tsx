@@ -1,10 +1,19 @@
 import { ButtonHTMLAttributes } from "react";
 import styles from "./Button.module.scss";
 
-interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+type Variant = "default" | "nofill";
 
-const Button: React.FC<IProps> = ({ ...rest }) => {
-  const classNames = `${styles.button} ${rest.className ?? ""}`;
+interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: Variant;
+};
+
+const variantToClass: {[key in Variant]: string} = {
+  'default': styles.button__default,
+  'nofill': styles.button__nofill,
+}
+
+const Button: React.FC<IProps> = ({ variant = 'default', ...rest }) => {
+  const classNames = `${styles.button} ${rest.className ?? ""} ${variantToClass[variant]}`;
   return (
     <button {...rest} className={classNames}>
       {rest.children}

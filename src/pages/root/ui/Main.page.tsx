@@ -17,7 +17,7 @@ const MainPage = () => {
     onSubmit,
   } = useSelectedBuilding(entries, updateEntry);
 
-  const { onHeaderAddClick, render: renderModals } = useSelectionModals({
+  const { onHeaderAddClick, render: renderModals, canEdit } = useSelectionModals({
     selectedApartments,
     selectedEntries,
     onApartmentSelect,
@@ -26,6 +26,9 @@ const MainPage = () => {
   });
 
   const onAddClick = (buildingId: number) => {
+    if (!canEdit) {
+      return;
+    }
     onCurrentBuildingIdChange(buildingId);
     onHeaderAddClick();
   };

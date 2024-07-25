@@ -1,4 +1,3 @@
-import { enrtiesList } from "@/entities/entry/entry.data";
 import { IBuildingTableRow } from "@/features/building-table-items";
 import { useCallback, useState } from "react";
 

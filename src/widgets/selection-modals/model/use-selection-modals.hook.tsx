@@ -30,7 +30,7 @@ export const useSelectionModals = ({
       open(ModalType.Apartment);
       onEntrySelect(id);
     },
-    [state, onEntrySelect]
+    [state, onEntrySelect, open]
   );
 
   const handleOnFinish = useCallback(() => {

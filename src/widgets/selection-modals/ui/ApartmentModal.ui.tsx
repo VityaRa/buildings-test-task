@@ -38,7 +38,7 @@ const ApartmentModal: React.FC<Props> = ({ onClose, selected, onSelect, onFinish
 
       onFinish();
     },
-    onLeftArrow: onClose,
+    onLeftArrow: onClose
   });
 
   return (

@@ -46,7 +46,7 @@ export const useSelectedBuilding = (
         return prevArray.filter((_, idx) => idx !== currentEntryIndex);
       };
 
-      let copy = [...prevArray];
+      const copy = [...prevArray];
       copy[currentEntryIndex] = {...tempCurrentEntry, apartments: newApartmentsForEntry};
       return copy;
     });

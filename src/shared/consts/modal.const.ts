@@ -1,0 +1,1 @@
+export const MAX_MODAL_ENTITIES_COUNT = 6;

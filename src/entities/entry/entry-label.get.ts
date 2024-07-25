@@ -1,5 +1,5 @@
 import { IEntry } from "./entry.types";
 
-export const getEntryLabel = (entry: IEntry) => {
-  return `Подъезд ${entry.id}`
+export const getEntryLabel = (entryId: IEntry['id']) => {
+  return `Подъезд ${entryId}`
 }

@@ -1,9 +1,9 @@
 import { ButtonHTMLAttributes } from "react";
 import styles from "./Button.module.scss";
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {}
+interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
-const Button: React.FC<Props> = ({ ...rest }) => {
+const Button: React.FC<IProps> = ({ ...rest }) => {
   const classNames = `${styles.button} ${rest.className ?? ""}`;
   return (
     <button {...rest} className={classNames}>

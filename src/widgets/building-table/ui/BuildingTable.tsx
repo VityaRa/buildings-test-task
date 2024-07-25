@@ -6,7 +6,7 @@ import {
 import React from "react";
 import styles from "./BuildingTable.module.scss";
 
-interface Props {
+interface IProps {
   buildingId: number;
   entries: IBuildingTableRow[];
 
@@ -14,7 +14,7 @@ interface Props {
   onAdd: VoidFunction;
 }
 
-const BuildingTable: React.FC<Props> = ({
+const BuildingTable: React.FC<IProps> = ({
   buildingId,
   entries,
   onAdd,

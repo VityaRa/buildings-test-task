@@ -1,0 +1,1 @@
+export const BUILDINGS_LIST = [1,2,3,4];

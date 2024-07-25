@@ -18,10 +18,10 @@ const BuildingTableHeader: React.FC<IProps> = ({
     <div className={styles.header}>
       <h2 className={styles.header__title}>{getBuildingLabel(buildingId)}</h2>
       <div className={styles.header__actions}>
-        <Button onClick={onClear}>
+        <Button className={styles.header__actions__btn} onClick={onClear}>
           <TrashIcon />
         </Button>
-        <Button onClick={onAdd}>
+        <Button className={styles.header__actions__btn} onClick={onAdd}>
           <PlusIcon />
         </Button>
       </div>

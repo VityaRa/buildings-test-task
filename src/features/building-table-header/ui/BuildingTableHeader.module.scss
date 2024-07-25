@@ -14,5 +14,10 @@
     display: flex;
     gap: 0.8rem;
     align-items: center;
+
+    &__btn {
+      height: 2.8rem;
+      width: 2.8rem;
+    }
   }
 }

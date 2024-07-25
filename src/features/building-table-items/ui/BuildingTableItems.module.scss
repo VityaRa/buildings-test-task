@@ -1,0 +1,35 @@
+.table {
+  background-color: var(--white-color);
+  border-top-left-radius: 1.2rem;
+  border-top-right-radius: 1.2rem;
+  border-collapse: collapse;
+  th, td {
+    border: 1px solid black;
+  }
+
+  &__column {
+    width: 18rem;
+
+    &__left {
+      border-left: unset !important;
+    }
+
+    &__right {
+      border-right: unset !important;
+    }
+  }
+
+
+  &__header {
+    height: 6rem;
+    th {
+      border-top: unset;
+    }
+  }
+
+  &__body {
+    &__row {
+      height: 3.2rem;
+    }
+  }
+}

@@ -1,0 +1,1 @@
+export const APARTMENT_NUMBER_LABEL = 'Номер квартиры'

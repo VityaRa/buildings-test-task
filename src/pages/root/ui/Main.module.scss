@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  margin-top: 4rem;
+  margin-left: 4rem;
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 4rem;
+
+  }
+}

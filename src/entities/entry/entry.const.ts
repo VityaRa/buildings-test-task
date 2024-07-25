@@ -1,0 +1,1 @@
+export const ENTRY_NUMBER_LABEL = 'Номер подъезда'
